@@ -1,4 +1,4 @@
-# Public errata — População Sintética de Portugal v1.0.0
+# Public errata — População Sintética de Portugal v1.0.1
 
 **Status at packaging:** no corrections recorded.
 

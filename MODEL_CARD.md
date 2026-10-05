@@ -3,7 +3,8 @@
 > Evidence paths under `data/products/` refer to the modelling repository
 > (estimador-microsynthesis), where the audits and fit records are kept.
 
-**Status:** V1.0.0, built and verified on 2026-10-05 and published on 2026-10-05.
+**Status:** v1.0.1, built and verified on 2026-10-05. It has the same microdata as v1.0.0; only the public
+answers changed: every parish now shows its own numbers, and no cell is hidden.
 
 ## Model and data product
 
@@ -13,7 +14,7 @@
 **Geography:** freguesia, with município fallback where parish publication is
 not supported  
 **Record levels:** households and persons  
-**Release:** v1.0.0 (verified 2026-10-05; published 2026-10-05)
+**Release:** v1.0.1 (2026-10-05; supersedes v1.0.0 of the same day)
 
 Portugal SynthPop generates household and person records whose aggregate
 distributions follow published Census constraints. The records support
@@ -154,12 +155,11 @@ population (doc 201 §9.4). Small parishes carry quality labels instead of being
 withheld. Each has a `quality_tier` and a `publication_population` in the
 quality table, and a parish under 500 residents can't reach tier A or B.
 
-Public-query quality is query-specific:
-
-- direct publication when the geography and requested variables pass;
-- municipality fallback when the parish result is too weak;
-- refusal when neither result is supported;
-- cell suppression below the public minimum.
+**Public answers (v1.0.1).** The website answers every question for every parish with that parish's own numbers
+and its quality tier. No cell is hidden, and a category with no one in it shows 0. v1.0.0 had applied launch
+thresholds written in July: cells under 10 shown as "Suprimido", and tier-C parishes answered by their municipality.
+Those thresholds hid about half of the parish answers, and they are removed. The contract can still express
+fallback, refusal and suppression for a query that declares them; no v1.0.1 query does.
 
 The machine-readable rules ship with the release as `public/response.schema.json`,
 `public/bundle.schema.json` and `public/reason_glossary.json`.
@@ -253,16 +253,15 @@ The planned V1.0 package contains:
 - this model card, methodology, privacy note, and data dictionary;
 - citation, attribution, errata, and source-revision policy.
 
-**v1.0.0, as built on 2026-10-05.**
+**v1.0.1, as built on 2026-10-05** (v1.0.0's microdata, the v1.0.1 public bundle).
 
 - **Contents:** 74 files plus `checksums.sha256`, 285 MB in all; 3,092 parishes
   published, 0 suppressed; 10,340,441 persons and 4,154,571 households.
-- **Hashes:** the SHA-256 of `checksums.sha256` is `e85bc2da93cc0b745ca2b4aa4e81317241bf39c1d13402d7b2552130dac2c2f1`;
+- **Hashes:** the SHA-256 of `checksums.sha256` is `5145f8158afd99684ef118f3f95e03396a17276a2ffbe7c8573981ac87a46305`;
   the model is `062e2ad784886b7287536233f853db151c57615d2b1a952fb2e12368581e76d3`.
-- **Code revision:** `5677c84`, packaged from a clean checkout. Run start, declared from the run's provenance
+- **Code revision:** `710d731`, packaged from a clean checkout. Run start, declared from the run's provenance
   marker: 2026-09-27T20:05:36+01:00.
-- **Verification:** `verify-release --release-ready` passed on that checkout, again from a
-  fresh clone, and once more immediately before upload (2026-10-05).
+- **Verification:** `verify-release --release-ready` passed on that checkout and in a fresh clone.
 - **Provenance:** the code and scheduling changed in flight without changing the
   population configuration. These changes are recorded per phase in
   `data/products/validation/p11_national_ht_provenance_addendum.json`, with the

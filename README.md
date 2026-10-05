@@ -1,4 +1,4 @@
-# População Sintética de Portugal — v1.0.0
+# População Sintética de Portugal — v1.0.1
 
 **Estas pessoas não são reais.** A synthetic population of every parish
 (freguesia) in Portugal, calibrated to the published tables of **INE Censos 2021**
@@ -21,25 +21,25 @@ Explore it by parish, read the methodology and the quality scorecard at
 
 ## Download
 
-Files are attached to the [v1.0.0 release](https://github.com/estimadorpt/pt-synthpop/releases/tag/v1.0.0):
+Files are attached to the [v1.0.1 release](https://github.com/estimadorpt/pt-synthpop/releases/tag/v1.0.1). v1.0.1 replaced [v1.0.0](https://github.com/estimadorpt/pt-synthpop/releases/tag/v1.0.0) on the day of publication: the microdata are identical, and only the public answers changed (every parish answers with its own numbers and quality tier; nothing is suppressed; zero categories show 0).
 
 | File | What it is |
 |---|---|
-| `pt-synthpop-v1.0.0.zip` | The complete release package (≈ 182 MB): national and per-district parquet, the quality table, `metadata.json`, the public query bundle and schemas, and the trust files |
-| `pt-synthpop-v1.0.0-persons.parquet` | All persons, one national file (≈ 78 MB) |
-| `pt-synthpop-v1.0.0-households.parquet` | All households, one national file (≈ 7 MB) |
-| `pt-synthpop-v1.0.0-quality.csv` | One row per parish: population, households, quality tier, fallback município. **Read this first.** |
-| `pt-synthpop-v1.0.0-metadata.json` | Column dictionary, label maps and provenance |
+| `pt-synthpop-v1.0.1.zip` | The complete release package (≈ 182 MB): national and per-district parquet, the quality table, `metadata.json`, the public query bundle and schemas, and the trust files |
+| `pt-synthpop-v1.0.1-persons.parquet` | All persons, one national file (≈ 78 MB) |
+| `pt-synthpop-v1.0.1-households.parquet` | All households, one national file (≈ 7 MB) |
+| `pt-synthpop-v1.0.1-quality.csv` | One row per parish: population, households, quality tier, fallback município. **Read this first.** |
+| `pt-synthpop-v1.0.1-metadata.json` | Column dictionary, label maps and provenance |
 | `checksums.sha256` | SHA-256 of every file inside the package |
 | `SHA256SUMS` | SHA-256 of the release assets above |
 
 ```bash
 sha256sum -c SHA256SUMS                     # the downloads
-unzip pt-synthpop-v1.0.0.zip && cd pt-synthpop-v1.0.0 && sha256sum -c checksums.sha256
+unzip pt-synthpop-v1.0.1.zip && cd pt-synthpop-v1.0.1 && sha256sum -c checksums.sha256
 ```
 
 The package's `checksums.sha256` itself has SHA-256
-`e85bc2da93cc0b745ca2b4aa4e81317241bf39c1d13402d7b2552130dac2c2f1`.
+`5145f8158afd99684ef118f3f95e03396a17276a2ffbe7c8573981ac87a46305`.
 
 ## Using it
 
@@ -50,17 +50,19 @@ is unique only within a parish.
 import duckdb
 duckdb.sql("""
   select p.freguesia, count(*) as people
-  from 'pt-synthpop-v1.0.0-persons.parquet' p
-  join 'pt-synthpop-v1.0.0-households.parquet' h using (freguesia, synthetic_hh_id)
+  from 'pt-synthpop-v1.0.1-persons.parquet' p
+  join 'pt-synthpop-v1.0.1-households.parquet' h using (freguesia, synthetic_hh_id)
   where h.hh_size = 1 and p.age >= 65
   group by 1
 """)
 ```
 
-**Quality.** Every parish is published; small parishes carry labels instead of
-being suppressed. Tier C parishes (1,611) should be read at the level of their
-município (`fallback_geography` in the quality table). The labels, the fit by parish
-size and the known limitations are in the [model card](MODEL_CARD.md).
+**Quality.** Every parish is published with its own numbers; small parishes carry
+quality labels instead of being withheld. Tier C (1,611 parishes: under 500 residents,
+or a weaker fit to INE's tables) calls for more care; the quality table also names each
+tier C parish's município (`fallback_geography`) for anyone who prefers to aggregate.
+The labels, the fit by parish size and the known limitations are in the
+[model card](MODEL_CARD.md).
 
 **Use it for** descriptive and small-area analysis within the quality rules,
 journalism, teaching, reproducible research, and testing tools that need realistic
@@ -79,7 +81,7 @@ Required attribution ([ATTRIBUTION.txt](ATTRIBUTION.txt)):
 
 > Fonte: Instituto Nacional de Estatística, IP – Portugal (Recenseamento Geral da População e Habitação — Censos 2021; período de referência: 2021). Informação modificada: os dados aqui publicados são uma população sintética gerada por estimador.pt a partir das distribuições marginais publicadas e do Ficheiro de Uso Público (FUP) dos Censos 2021, ao abrigo da licença CC BY 4.0; não constituem microdados oficiais do INE e o INE não é responsável pelo seu conteúdo.
 
-Cite as: estimador.pt, População Sintética de Portugal v1.0.0 (2026), CC BY 4.0.
+Cite as: estimador.pt, População Sintética de Portugal v1.0.1 (2026), CC BY 4.0.
 ([CITATION.cff](CITATION.cff); `CITATION.package.cff` is the copy shipped inside the package.)
 
 ## Corrections

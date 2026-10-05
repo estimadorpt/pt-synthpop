@@ -1,7 +1,7 @@
 cff-version: 1.2.0
 message: "If you use this dataset, please cite it using these metadata."
 title: "População Sintética de Portugal"
-version: "1.0.0"
+version: "1.0.1"
 date-released: "2026-10-05"
 type: dataset
 authors:
