@@ -1,0 +1,8 @@
+cff-version: 1.2.0
+message: "If you use this dataset, please cite it using these metadata."
+title: "População Sintética de Portugal"
+version: "1.0.0"
+type: dataset
+authors:
+  - name: "estimador.pt"
+license: "CC-BY-4.0"

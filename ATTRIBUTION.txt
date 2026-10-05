@@ -1,0 +1,6 @@
+Fonte: Instituto Nacional de Estatística, IP – Portugal (Recenseamento Geral da População e Habitação — Censos 2021; período de referência: 2021). Informação modificada: os dados aqui publicados são uma população sintética gerada por estimador.pt a partir das distribuições marginais publicadas e do Ficheiro de Uso Público (FUP) dos Censos 2021, ao abrigo da licença CC BY 4.0; não constituem microdados oficiais do INE e o INE não é responsável pelo seu conteúdo.
+
+Source: Instituto Nacional de Estatística, IP – Portugal (2021 Population and Housing Census; reference period: 2021). Modified information: this is a synthetic population produced by estimador.pt from the Census 2021 published marginals and Public Use File (FUP) under the CC BY 4.0 licence; it is not official INE microdata and INE is not responsible for its content.
+
+Citar como / Cite as:
+estimador.pt, População Sintética de Portugal v1.0.0 (2026), CC BY 4.0.
