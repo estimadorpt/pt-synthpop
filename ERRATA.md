@@ -43,6 +43,23 @@
   Censos 2021 geography ("Calheta (R.A.M.)", "Calheta (R.A.A.)", "Lagoa (R.A.A.)"). No number
   changed: in the microdata only the `municipio_name` of those three municípios differs.
 
+### 2026-10-06 — the synthetic population is licensed CC BY-NC 4.0 (metadata; relabelled in place)
+
+- **Affected:** the licence statements of every published release (v1.0.0, v1.0.1 and v1.0.3)
+  and of every later one: `LICENSE_DATA.md`, `ATTRIBUTION.txt`, `README.md`, `CITATION.cff` and
+  `metadata.json` (`license`, `ine_attribution`).
+- **What changed:** from 6 October 2026 the synthetic population is licensed under Creative
+  Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0,
+  https://creativecommons.org/licenses/by-nc/4.0/). INE's source data (Censos 2021 published
+  tables and Public Use File) remain INE's, reused under CC BY 4.0, and the credit to INE is
+  unchanged.
+- **What did not change:** the data. The persons, households and quality files and the public
+  bundle and schemas are byte-identical; their sha256 in `checksums.sha256` are unchanged.
+- **Replacement:** none. By the publisher's decision each release is relabelled in place under
+  its own version number, rather than as the patch release `SOURCE_REVISION_POLICY.md` calls
+  for: its licence statements, this file, `metadata.json`, `checksums.sha256` and the zip
+  change, and the release's `SHA256SUMS` lists their new sha256.
+
 ## How corrections are recorded
 
 Corrections are never applied silently to a stable release. Each entry records:

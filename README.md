@@ -13,7 +13,7 @@ and published by [estimador.pt](https://estimador.pt/pt/populacao/).
 | Households | 4,154,571 (5,475 of them collective living quarters) |
 | Parishes | 3,092, all published, with quality labels (A 776 · B 705 · C 1,611) |
 | Census vintage | INE Censos 2021; geography DICOFRE / CAOP 2021 |
-| Licence | [CC BY 4.0](LICENSE_DATA.md) |
+| Licence | [CC BY-NC 4.0](LICENSE_DATA.md) (Attribution-NonCommercial; INE's source data stay CC BY 4.0) |
 | Published | 2026-10-05 |
 
 Explore it by parish, read the methodology and the quality scorecard at
@@ -39,7 +39,7 @@ unzip pt-synthpop-v1.0.3.zip && cd pt-synthpop-v1.0.3 && sha256sum -c checksums.
 ```
 
 The package's `checksums.sha256` itself has SHA-256
-`c5a009679c9037e48156b3d89d4ffd6a66f1968098ab7792b0159054a195c36e`.
+`0992bcfec9595df4fc2102349a6692e570ebc4322377e85438d795dc5a4ab8d8`.
 
 ## Using it
 
@@ -79,14 +79,18 @@ attributes; synthetic does not mean that accidental attribute matches are imposs
 
 Required attribution ([ATTRIBUTION.txt](ATTRIBUTION.txt)):
 
-> Fonte: Instituto Nacional de Estatística, IP – Portugal (Recenseamento Geral da População e Habitação — Censos 2021; período de referência: 2021). Informação modificada: os dados aqui publicados são uma população sintética gerada por estimador.pt a partir das distribuições marginais publicadas e do Ficheiro de Uso Público (FUP) dos Censos 2021, ao abrigo da licença CC BY 4.0; não constituem microdados oficiais do INE e o INE não é responsável pelo seu conteúdo.
+> Fonte: Instituto Nacional de Estatística, IP – Portugal (Recenseamento Geral da População e Habitação — Censos 2021; período de referência: 2021). Informação modificada: os dados aqui publicados são uma população sintética gerada por estimador.pt a partir das distribuições marginais publicadas e do Ficheiro de Uso Público (FUP) dos Censos 2021, informação do INE reutilizada ao abrigo da licença CC BY 4.0; não constituem microdados oficiais do INE e o INE não é responsável pelo seu conteúdo. A população sintética é publicada por estimador.pt ao abrigo da licença CC BY-NC 4.0 (Atribuição-NãoComercial 4.0 Internacional).
 
-Cite as: estimador.pt, População Sintética de Portugal v1.0.3 (2026), CC BY 4.0.
+Cite as: estimador.pt, População Sintética de Portugal v1.0.3 (2026), CC BY-NC 4.0.
 ([CITATION.cff](CITATION.cff), identical to the copy inside the package.)
 
 ## Corrections
 
 Stable releases are never replaced in place. Corrections are recorded in
 [ERRATA.md](ERRATA.md) under the [source revision policy](SOURCE_REVISION_POLICY.md).
+The one exception, by the publisher's decision, is the licence: on 6 October 2026 every
+published release (v1.0.0, v1.0.1, v1.0.3) was relabelled in place to CC BY-NC 4.0. Only
+the licence statements, `ERRATA.md`, `metadata.json`, `checksums.sha256` and the zip
+changed; the data are byte-identical. See the 2026-10-06 entry in [ERRATA.md](ERRATA.md).
 Report a problem by opening an issue in this repository or writing to
 info@estimador.pt.

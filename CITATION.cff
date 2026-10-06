@@ -6,6 +6,6 @@ date-released: "2026-10-05"
 type: dataset
 authors:
   - name: "estimador.pt"
-license: "CC-BY-4.0"
+license: "CC-BY-NC-4.0"
 url: "https://estimador.pt/pt/populacao/dados/"
 repository: "https://github.com/estimadorpt/pt-synthpop"

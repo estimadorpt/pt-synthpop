@@ -266,8 +266,14 @@ The planned V1.0 package contains:
   published, 0 suppressed; 10,340,441 persons and 4,154,571 households.
   - Against v1.0.2, the microdata differ only in the household `nuts2` of 417 parishes (448,214 households).
   - Against v1.0.1, they also differ in `municipio_name` for Calheta (R.A.M.), Calheta (R.A.A.) and Lagoa (R.A.A.).
-- **Hashes:** the SHA-256 of `checksums.sha256` is `c5a009679c9037e48156b3d89d4ffd6a66f1968098ab7792b0159054a195c36e`;
-  the model is `062e2ad784886b7287536233f853db151c57615d2b1a952fb2e12368581e76d3`.
+- **Hashes:** the SHA-256 of `checksums.sha256` is `0992bcfec9595df4fc2102349a6692e570ebc4322377e85438d795dc5a4ab8d8`
+  since the 2026-10-06 relabelling (`c5a009679c9037e48156b3d89d4ffd6a66f1968098ab7792b0159054a195c36e` as built
+  on 2026-10-05); the model is `062e2ad784886b7287536233f853db151c57615d2b1a952fb2e12368581e76d3`.
+- **Licence:** the synthetic population is licensed CC BY-NC 4.0 (Bernardo, 2026-10-06), in this release and in
+  every other one (v1.0.0 and v1.0.1 were relabelled the same way): `LICENSE_DATA.md`, `ATTRIBUTION.txt`,
+  `README.md`, `CITATION.cff`, `ERRATA.md` and `metadata.json` changed in place under the same version
+  (`metadata.json` `16f7639817f0927b3fb37fdabdbae83f9c972581503876d485013a3a67fb788c`); every data file and the
+  public bundle are byte-identical. INE's source data remain INE's, reused under CC BY 4.0.
 - **Code revision:** `4bf0819`, packaged from a clean checkout. Run start, declared from the run's provenance
   marker: 2026-09-27T20:05:36+01:00.
 - **Verification:** `verify-release --release-ready` passed on that checkout, in a fresh clone, and in a fresh
