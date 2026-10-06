@@ -3,18 +3,19 @@
 > Evidence paths under `data/products/` refer to the modelling repository
 > (estimador-microsynthesis), where the audits and fit records are kept.
 
-**Status:** v1.0.1, built and verified on 2026-10-05. It has the same microdata as v1.0.0; only the public
-answers changed: every parish now shows its own numbers, and no cell is hidden.
+**Status:** v1.0.3, built and verified on 2026-10-05. It has the same population as v1.0.0.
+- v1.0.1 changed the public answers: every parish shows its own numbers, and no cell is hidden.
+- v1.0.2 fixed their presentation and named three municípios unambiguously.
+- v1.0.3 corrects the `nuts2` region column to NUTS-2013 (see ERRATA).
 
 ## Model and data product
 
 **Name:** População Sintética de Portugal / Portugal SynthPop  
 **Publisher:** estimador.pt  
 **Data vintage:** INE Censos 2021  
-**Geography:** freguesia, with município fallback where parish publication is
-not supported  
+**Geography:** freguesia; every parish is published with its quality tier  
 **Record levels:** households and persons  
-**Release:** v1.0.1 (2026-10-05; supersedes v1.0.0 of the same day)
+**Release:** v1.0.3 (2026-10-05; supersedes v1.0.0–v1.0.2 of the same day)
 
 Portugal SynthPop generates household and person records whose aggregate
 distributions follow published Census constraints. The records support
@@ -104,8 +105,9 @@ It is reported, not gated (doc 190).
 
 - **Municipalities:** the median over the 308 municipalities is 0.017, and 90% are
   below 0.038.
-- **Regions:** the median by NUTS2 region ranges from 0.020 (Algarve, Lisbon and
-  Tagus Valley) to 0.060 (Alentejo).
+- **Regions:** grouped by district (Norte, Centro, Lisboa e Vale do Tejo, Alentejo,
+  Algarve, Açores, Madeira; these are the evaluator's strata, not NUTS II), the median
+  ranges from 0.020 (Algarve, Lisboa e Vale do Tejo) to 0.060 (Alentejo).
 - **Quality tiers:** 776 parishes are tier A, 705 tier B and 1,611 tier C.
 - **Against the previous engine's baseline national** (job 143), on the same
   parishes and the same private basis: the error falls by about three quarters
@@ -146,6 +148,9 @@ them is the next version's, `docs/launch_readiness_20260714/205_next_version_pla
   These results depend on machine speed; each parish's record names the exit.
   Parish 110665 is the furthest from its band (median 0.023).
 - **The appended institutional residents** are partial records by design.
+- **Corrected in v1.0.3: the `nuts2` column.** Until v1.0.2 it was a district grouping, not NUTS-2013 (doc 204h):
+  417 parishes (10.8% of residents) carried the wrong NUTS II region. From v1.0.3 it is the parish's NUTS-2013
+  region, and residents by `nuts2` match INE's regional totals to within 0.06%.
 
 ## Small-area publication policy
 
@@ -159,7 +164,9 @@ quality table, and a parish under 500 residents can't reach tier A or B.
 and its quality tier. No cell is hidden, and a category with no one in it shows 0. v1.0.0 had applied launch
 thresholds written in July: cells under 10 shown as "Suprimido", and tier-C parishes answered by their municipality.
 Those thresholds hid about half of the parish answers, and they are removed. The contract can still express
-fallback, refusal and suppression for a query that declares them; no v1.0.1 query does.
+fallback, refusal and suppression for a query that declares them; no v1.0.1 or v1.0.2 query does. From v1.0.2,
+household questions are asked of private households (INE's household universe), so care homes and other
+institutional living quarters no longer count as households there.
 
 The machine-readable rules ship with the release as `public/response.schema.json`,
 `public/bundle.schema.json` and `public/reason_glossary.json`.
@@ -253,15 +260,18 @@ The planned V1.0 package contains:
 - this model card, methodology, privacy note, and data dictionary;
 - citation, attribution, errata, and source-revision policy.
 
-**v1.0.1, as built on 2026-10-05** (v1.0.0's microdata, the v1.0.1 public bundle).
+**v1.0.3, as built on 2026-10-05** (v1.0.0's population; the v1.0.3 public bundle).
 
-- **Contents:** 74 files plus `checksums.sha256`, 285 MB in all; 3,092 parishes
+- **Contents:** 74 files plus `checksums.sha256`, 282 MB in all; 3,092 parishes
   published, 0 suppressed; 10,340,441 persons and 4,154,571 households.
-- **Hashes:** the SHA-256 of `checksums.sha256` is `5145f8158afd99684ef118f3f95e03396a17276a2ffbe7c8573981ac87a46305`;
+  - Against v1.0.2, the microdata differ only in the household `nuts2` of 417 parishes (448,214 households).
+  - Against v1.0.1, they also differ in `municipio_name` for Calheta (R.A.M.), Calheta (R.A.A.) and Lagoa (R.A.A.).
+- **Hashes:** the SHA-256 of `checksums.sha256` is `c5a009679c9037e48156b3d89d4ffd6a66f1968098ab7792b0159054a195c36e`;
   the model is `062e2ad784886b7287536233f853db151c57615d2b1a952fb2e12368581e76d3`.
-- **Code revision:** `710d731`, packaged from a clean checkout. Run start, declared from the run's provenance
+- **Code revision:** `4bf0819`, packaged from a clean checkout. Run start, declared from the run's provenance
   marker: 2026-09-27T20:05:36+01:00.
-- **Verification:** `verify-release --release-ready` passed on that checkout and in a fresh clone.
+- **Verification:** `verify-release --release-ready` passed on that checkout, in a fresh clone, and in a fresh
+  clone without PyTorch (from v1.0.2 the verifier needs only the core dependencies).
 - **Provenance:** the code and scheduling changed in flight without changing the
   population configuration. These changes are recorded per phase in
   `data/products/validation/p11_national_ht_provenance_addendum.json`, with the
@@ -293,8 +303,9 @@ and weights-release evidence supports that term.
 - Stable releases remain citable.
 - Corrections are recorded in a public errata log.
 - INE source revisions trigger a documented patch or re-evaluation decision.
-- V1.1 must identify which fields were updated to 2025, carried forward from
-  2021, or newly modelled.
+- V1.1 is the corrected Census 2021 national (Bernardo, 2026-10-05). A later
+  2025 update is its own version, and it must identify which fields were updated
+  to 2025, carried forward from 2021, or newly modelled.
 - Publishing weights requires a separate memorization, privacy, and licence
   review; output privacy does not clear the weights.
 
